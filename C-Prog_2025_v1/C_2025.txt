@@ -1,3 +1,349 @@
+### Answers to C Programming Questions
+
+#### **1. Solutions to GeeksforGeeks Coding Problems**
+Here are concise implementations for each problem from the provided link:
+
+1. **Check if two numbers are equal without arithmetic/comparison operators**  
+   ```c
+   #include <stdio.h>
+   int main() {
+       int a = 5, b = 5;
+       if (!(a ^ b)) printf("Equal\n"); // Using bitwise XOR
+       else printf("Not Equal\n");
+       return 0;
+   }
+   ```
+
+2. **Swap two numbers without a third variable**  
+   ```c
+   #include <stdio.h>
+   int main() {
+       int x = 10, y = 20;
+       x = x ^ y; y = x ^ y; x = x ^ y; // XOR swap
+       printf("x=%d, y=%d\n", x, y);
+       return 0;
+   }
+   ```
+
+3. **Find maximum of two numbers without conditionals**  
+   ```c
+   #include <stdio.h>
+   int main() {
+       int a = 25, b = 13;
+       int max = a - ((a - b) & ((a - b) >> 31)); // Bit manipulation
+       printf("Max: %d\n", max);
+       return 0;
+   }
+   ```
+
+4. **Add two integers without `+`**  
+   ```c
+   int add(int a, int b) {
+       while (b) {
+           int carry = a & b;
+           a = a ^ b;
+           b = carry << 1;
+       }
+       return a;
+   }
+   ```
+
+5. **Multiply without `*`**  
+   ```c
+   int multiply(int a, int b) {
+       int res = 0;
+       while (b > 0) {
+           if (b & 1) res = add(res, a);
+           a <<= 1; b >>= 1;
+       }
+       return res;
+   }
+   ```
+
+6. **Check power of two**  
+   ```c
+   _Bool isPowerOfTwo(int n) {
+       return n && !(n & (n - 1));
+   }
+   ```
+
+7. **Print all divisors**  
+   ```c
+   void printDivisors(int n) {
+       for (int i = 1; i <= sqrt(n); i++)
+           if (n % i == 0) printf("%d %d ", i, n / i);
+   }
+   ```
+
+8. **Sum of divisors**  
+   ```c
+   int sumDivisors(int n) {
+       int sum = 0;
+       for (int i = 1; i <= sqrt(n); i++)
+           if (n % i == 0) sum += i + (i != n/i ? n/i : 0);
+       return sum;
+   }
+   ```
+
+9. **Perfect number check**  
+   ```c
+   _Bool isPerfect(int n) {
+       return sumDivisors(n) - n == n;
+   }
+   ```
+
+10. **Next prime number**  
+    ```c
+    int nextPrime(int n) {
+        while (1) if (isPrime(++n)) return n;
+    }
+    // Helper: isPrime() checks divisibility up to sqrt(n)
+    ```
+
+11. **Fibonacci without recursion**  
+    ```c
+    void fib(int n) {
+        int a = 0, b = 1;
+        for (int i = 0; i < n; i++) {
+            printf("%d ", a);
+            int temp = a; a = b; b = temp + b;
+        }
+    }
+    ```
+
+12. **Fibonacci with recursion**  
+    ```c
+    int fib(int n) {
+        return n <= 1 ? n : fib(n - 1) + fib(n - 2);
+    }
+    ```
+
+13. **Factorial with recursion**  
+    ```c
+    int fact(int n) {
+        return n <= 1 ? 1 : n * fact(n - 1);
+    }
+    ```
+
+14. **Factorial without recursion**  
+    ```c
+    int fact(int n) {
+        int res = 1;
+        for (int i = 2; i <= n; i++) res *= i;
+        return res;
+    }
+    ```
+
+15. **Reverse a number**  
+    ```c
+    int reverse(int num) {
+        int rev = 0;
+        while (num) {
+            rev = rev * 10 + num % 10;
+            num /= 10;
+        }
+        return rev;
+    }
+    ```
+
+16. **Reverse a string**  
+    ```c
+    void reverse(char *str) {
+        int len = strlen(str);
+        for (int i = 0, j = len - 1; i < j; i++, j--) {
+            char temp = str[i];
+            str[i] = str[j]; 
+            str[j] = temp;
+        }
+    }
+    ```
+
+17. **Palindrome check**  
+    ```c
+    _Bool isPalindrome(char *str) {
+        int len = strlen(str);
+        for (int i = 0; i < len/2; i++)
+            if (str[i] != str[len - 1 - i]) return 0;
+        return 1;
+    }
+    ```
+
+18. **Armstrong number**  
+    ```c
+    _Bool isArmstrong(int n) {
+        int sum = 0, digits = log10(n) + 1, temp = n;
+        while (temp) {
+            sum += pow(temp % 10, digits);
+            temp /= 10;
+        }
+        return sum == n;
+    }
+    ```
+
+19. **Strong number**  
+    ```c
+    _Bool isStrong(int n) {
+        int sum = 0, temp = n;
+        while (temp) {
+            sum += fact(temp % 10);
+            temp /= 10;
+        }
+        return sum == n;
+    }
+    ```
+
+20. **Largest of three numbers**  
+    ```c
+    int max(int a, int b, int c) {
+        return (a > b) ? (a > c ? a : c) : (b > c ? b : c);
+    }
+    ```
+
+---
+
+#### **2. Additional Questions**
+
+**Q1: Void Pointer and Dereferencing**  
+- **Void Pointer**: Generic pointer type (`void*`) that can hold any data type's address.  
+- **Dereferencing**: ❌ **Cannot dereference directly**. Must cast to a concrete type first:  
+  ```c
+  int num = 42;
+  void *ptr = &num;
+  printf("%d", *(int*)ptr); // Cast to int* before dereferencing
+  ```
+
+**Q2: Output of `printf("%d")`**  
+- **Undefined Behavior**: Missing argument for `%d`. May print garbage or crash.
+
+**Q3: Print `%` Symbol**  
+- Escape `%` with another `%`:  
+  ```c
+  printf("100%% Complete"); // Output: "100% Complete"
+  ```
+
+**Q4: Dangling Pointers vs. Memory Leaks**  
+- **Dangling Pointer**: Points to deallocated memory. Accessing it ⚠️ crashes or corrupts data.  
+- **Memory Leak**: Allocated memory is orphaned (no pointers reference it). Wastes resources but doesn't cause immediate crashes.  
+  ```c
+  // Dangling pointer example
+  int *ptr = malloc(sizeof(int));
+  free(ptr); // ptr is now dangling!
+  ```
+
+**Q5: Free Memory Without `free()`**  
+- ❌ **No portable way**. Workarounds:  
+  - Use `realloc(ptr, 0)` (implementation-defined).  
+  - Restructure code to use automatic variables.  
+  - Let the OS reclaim memory after program exit (not recommended).
+
+**Q6: Use of `%n` in `printf()`**  
+- Writes the **number of characters printed** to a pointer:  
+  ```c
+  int count;
+  printf("Hello%n World", &count); // count = 5
+  ```
+
+**Q7: `#pragma` Directive**  
+- Provides compiler-specific instructions (e.g., disable warnings, control alignment):  
+  ```c
+  #pragma pack(1) // Set struct alignment to 1 byte
+  #pragma warning(disable: 4996) // Disable warning in MSVC
+  ```
+
+**Q8: Macro Output**  
+```c
+#include <stdio.h>
+#define SQUARE(a) (a)*(a)
+int main() {
+    printf("%d\n", SQUARE(4)); // 16 (4*4)
+    int x = 3;
+    printf("%d\n", SQUARE(++x)); // Undefined! May be 20 or 25
+}
+```
+- **Why undefined?** `SQUARE(++x)` expands to `(++x)*(++x)`, modifying `x` twice between sequence points.
+
+**Q9: Struct Sizes with Bit-Fields**  
+```c
+struct A { // Size = 1 byte (3+4+1 bits = 8 bits)
+    unsigned char c1 : 3;
+    unsigned char c2 : 4;
+    unsigned char c3 : 1;
+};
+
+struct B { // Size = 2 bytes
+    unsigned char c1 : 3;
+    unsigned char : 0; // Force next bit-field to new byte
+    unsigned char c2 : 4;
+    unsigned char c3 : 1;
+};
+```
+- **Key**: `unsigned char : 0` aligns next field to a new byte boundary.
+
+**Q10: Bubble Sort**  
+Repeatedly swaps adjacent elements if in wrong order:  
+```c
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++)
+        for (int j = 0; j < n-i-1; j++)
+            if (arr[j] > arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+}
+```
+
+**Q11: Struct vs Union**  
+| **Struct**                          | **Union**                          |
+|-------------------------------------|------------------------------------|
+| Members have separate memory        | Members share memory               |
+| Size = sum of all members (+ padding) | Size = largest member              |
+| All members accessible at once      | Only one member active at a time   |
+
+**Q12: lvalue vs rvalue**  
+- **lvalue**: Has a memory location (e.g., variables). Can appear on the left of `=`.  
+  ```c
+  int a = 10; // 'a' is lvalue
+  ```
+- **rvalue**: Temporary value (e.g., literals, expressions). Can only appear on the right of `=`.  
+  ```c
+  int b = a + 5; // `a + 5` is rvalue
+  ```
+
+**Q13: Program-OS Linking Structure**  
+- **`FILE` structure**: Bridges program and OS for file I/O operations. Defined in `<stdio.h>`.  
+  ```c
+  FILE *fp = fopen("file.txt", "r"); // Uses OS resources
+  ```
+
+**Q14: Right-Shift Output**  
+```c
+#include <stdio.h>
+int main() {
+    int a = -2;          // Binary: 111...1110 (32-bit two's complement)
+    printf("%x", a >> 3); // Output: fffffffd (sign extension)
+}
+```
+- **Why?** Arithmetic right shift preserves sign. `-2 >> 3` = `-1` → Hex: `0xffffffff` (32-bit).
+
+**Q15: String to Integer**  
+- Use `atoi()` (simple) or `strtol()` (robust):  
+  ```c
+  #include <stdlib.h>
+  int num = atoi("123"); // num = 123
+  ```
+- **Manual conversion**:  
+  ```c
+  int strToInt(const char *str) {
+      int res = 0, sign = 1, i = 0;
+      if (str[0] == '-') { sign = -1; i++; }
+      for (; str[i]; i++) res = res * 10 + (str[i] - '0');
+      return sign * res;
+  }
+  ```
+
+
+==================
 Here is a comprehensive list of  C interview questions and answers** categorized by key topics for clarity:
 
 ---
@@ -465,6 +811,8 @@ int haveOppositeSigns(int x, int y) {
 
 
 🔹 **Explanation**: XOR gives MSB = 1 (i.e., negative) only if signs differ.
+
+======================================================================================================
 
 
 ===================================================================================================
@@ -1769,5 +2117,5 @@ These challenging questions not only test **coding skills** but also probe **con
 49. When should you avoid bitwise operations in C?
 50. What embedded debugging tools help with bit-level analysis?
 
-
+================================
 
