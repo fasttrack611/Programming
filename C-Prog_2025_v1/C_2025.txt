@@ -15,7 +15,7 @@ Here are concise implementations for each problem from the provided link:
    ```
 
 2. **Swap two numbers without a third variable**  
-   ```c
+ 
    #include <stdio.h>
    int main() {
        int x = 10, y = 20;
@@ -23,10 +23,10 @@ Here are concise implementations for each problem from the provided link:
        printf("x=%d, y=%d\n", x, y);
        return 0;
    }
-   ```
+  
 
 3. **Find maximum of two numbers without conditionals**  
-   ```c
+  
    #include <stdio.h>
    int main() {
        int a = 25, b = 13;
@@ -37,7 +37,7 @@ Here are concise implementations for each problem from the provided link:
    ```
 
 4. **Add two integers without `+`**  
-   ```c
+  
    int add(int a, int b) {
        while (b) {
            int carry = a & b;
@@ -46,10 +46,10 @@ Here are concise implementations for each problem from the provided link:
        }
        return a;
    }
-   ```
+  
 
 5. **Multiply without `*`**  
-   ```c
+   
    int multiply(int a, int b) {
        int res = 0;
        while (b > 0) {
@@ -58,50 +58,50 @@ Here are concise implementations for each problem from the provided link:
        }
        return res;
    }
-   ```
+  
 
 6. **Check power of two**  
-   ```c
+ 
    _Bool isPowerOfTwo(int n) {
        return n && !(n & (n - 1));
    }
    ```
 
 7. **Print all divisors**  
-   ```c
+  
    void printDivisors(int n) {
        for (int i = 1; i <= sqrt(n); i++)
            if (n % i == 0) printf("%d %d ", i, n / i);
    }
-   ```
+  
 
 8. **Sum of divisors**  
-   ```c
+   
    int sumDivisors(int n) {
        int sum = 0;
        for (int i = 1; i <= sqrt(n); i++)
            if (n % i == 0) sum += i + (i != n/i ? n/i : 0);
        return sum;
    }
-   ```
+   
 
 9. **Perfect number check**  
-   ```c
+   
    _Bool isPerfect(int n) {
        return sumDivisors(n) - n == n;
    }
    ```
 
 10. **Next prime number**  
-    ```c
+   
     int nextPrime(int n) {
         while (1) if (isPrime(++n)) return n;
     }
     // Helper: isPrime() checks divisibility up to sqrt(n)
-    ```
+   
 
 11. **Fibonacci without recursion**  
-    ```c
+   
     void fib(int n) {
         int a = 0, b = 1;
         for (int i = 0; i < n; i++) {
@@ -109,14 +109,14 @@ Here are concise implementations for each problem from the provided link:
             int temp = a; a = b; b = temp + b;
         }
     }
-    ```
+   
 
 12. **Fibonacci with recursion**  
-    ```c
+   
     int fib(int n) {
         return n <= 1 ? n : fib(n - 1) + fib(n - 2);
     }
-    ```
+    
 
 13. **Factorial with recursion**  
     ```c
