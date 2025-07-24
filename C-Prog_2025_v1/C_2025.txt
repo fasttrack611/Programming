@@ -4,27 +4,28 @@
 Here are concise implementations for each problem from the provided link:
 
 1. **Check if two numbers are equal without arithmetic/comparison operators**  
-   ```c
    #include <stdio.h>
+
    int main() {
        int a = 5, b = 5;
        if (!(a ^ b)) printf("Equal\n"); // Using bitwise XOR
        else printf("Not Equal\n");
        return 0;
    }
-   ```
 
 2. **Swap two numbers without a third variable**  
  
    #include <stdio.h>
    int main() {
        int x = 10, y = 20;
-       x = x ^ y; y = x ^ y; x = x ^ y; // XOR swap
+       x = x ^ y;
+	   y = x ^ y;
+	   x = x ^ y; // XOR swap
        printf("x=%d, y=%d\n", x, y);
        return 0;
    }
   
-
+---------------------------------------------------------------------------------------
 3. **Find maximum of two numbers without conditionals**  
   
    #include <stdio.h>
@@ -34,8 +35,8 @@ Here are concise implementations for each problem from the provided link:
        printf("Max: %d\n", max);
        return 0;
    }
-   ```
 
+---------------------------------------------------------------------------------------  
 4. **Add two integers without `+`**  
   
    int add(int a, int b) {
@@ -46,8 +47,8 @@ Here are concise implementations for each problem from the provided link:
        }
        return a;
    }
-  
 
+---------------------------------------------------------------------------------------  
 5. **Multiply without `*`**  
    
    int multiply(int a, int b) {
@@ -58,15 +59,16 @@ Here are concise implementations for each problem from the provided link:
        }
        return res;
    }
-  
+---------------------------------------------------------------------------------------  
 
 6. **Check power of two**  
  
    _Bool isPowerOfTwo(int n) {
        return n && !(n & (n - 1));
    }
-   ```
 
+---------------------------------------------------------------------------------------  
+  
 7. **Print all divisors**  
   
    void printDivisors(int n) {
@@ -74,6 +76,7 @@ Here are concise implementations for each problem from the provided link:
            if (n % i == 0) printf("%d %d ", i, n / i);
    }
   
+---------------------------------------------------------------------------------------  
 
 8. **Sum of divisors**  
    
@@ -84,13 +87,14 @@ Here are concise implementations for each problem from the provided link:
        return sum;
    }
    
-
+---------------------------------------------------------------------------------------  
 9. **Perfect number check**  
    
    _Bool isPerfect(int n) {
        return sumDivisors(n) - n == n;
    }
-   ```
+---------------------------------------------------------------------------------------  
+
 
 10. **Next prime number**  
    
@@ -99,6 +103,7 @@ Here are concise implementations for each problem from the provided link:
     }
     // Helper: isPrime() checks divisibility up to sqrt(n)
    
+---------------------------------------------------------------------------------------  
 
 11. **Fibonacci without recursion**  
    
@@ -106,10 +111,13 @@ Here are concise implementations for each problem from the provided link:
         int a = 0, b = 1;
         for (int i = 0; i < n; i++) {
             printf("%d ", a);
-            int temp = a; a = b; b = temp + b;
+            int temp = a;
+			a = b;
+			b = temp + b;
         }
     }
    
+---------------------------------------------------------------------------------------  
 
 12. **Fibonacci with recursion**  
    
@@ -118,24 +126,24 @@ Here are concise implementations for each problem from the provided link:
     }
     
 
+---------------------------------------------------------------------------------------  
 13. **Factorial with recursion**  
-    ```c
-    int fact(int n) {
+    
+	int fact(int n) {
         return n <= 1 ? 1 : n * fact(n - 1);
     }
-    ```
+---------------------------------------------------------------------------------------  
 
 14. **Factorial without recursion**  
-    ```c
     int fact(int n) {
         int res = 1;
         for (int i = 2; i <= n; i++) res *= i;
         return res;
     }
-    ```
+
+---------------------------------------------------------------------------------------  
 
 15. **Reverse a number**  
-    ```c
     int reverse(int num) {
         int rev = 0;
         while (num) {
@@ -144,11 +152,11 @@ Here are concise implementations for each problem from the provided link:
         }
         return rev;
     }
-    ```
 
+---------------------------------------------------------------------------------------  
 16. **Reverse a string**  
-    ```c
-    void reverse(char *str) {
+    
+	void reverse(char *str) {
         int len = strlen(str);
         for (int i = 0, j = len - 1; i < j; i++, j--) {
             char temp = str[i];
@@ -156,20 +164,21 @@ Here are concise implementations for each problem from the provided link:
             str[j] = temp;
         }
     }
-    ```
 
+---------------------------------------------------------------------------------------  
 17. **Palindrome check**  
-    ```c
+
     _Bool isPalindrome(char *str) {
         int len = strlen(str);
         for (int i = 0; i < len/2; i++)
             if (str[i] != str[len - 1 - i]) return 0;
         return 1;
     }
-    ```
 
+
+---------------------------------------------------------------------------------------  
 18. **Armstrong number**  
-    ```c
+  
     _Bool isArmstrong(int n) {
         int sum = 0, digits = log10(n) + 1, temp = n;
         while (temp) {
@@ -178,10 +187,11 @@ Here are concise implementations for each problem from the provided link:
         }
         return sum == n;
     }
-    ```
 
+
+---------------------------------------------------------------------------------------  
 19. **Strong number**  
-    ```c
+ 
     _Bool isStrong(int n) {
         int sum = 0, temp = n;
         while (temp) {
@@ -192,43 +202,43 @@ Here are concise implementations for each problem from the provided link:
     }
     ```
 
+---------------------------------------------------------------------------------------  
 20. **Largest of three numbers**  
     ```c
     int max(int a, int b, int c) {
         return (a > b) ? (a > c ? a : c) : (b > c ? b : c);
     }
-    ```
 
----
+---------------------------------------------------------------------------------------  
 
 #### **2. Additional Questions**
 
 **Q1: Void Pointer and Dereferencing**  
 - **Void Pointer**: Generic pointer type (`void*`) that can hold any data type's address.  
 - **Dereferencing**: ❌ **Cannot dereference directly**. Must cast to a concrete type first:  
-  ```c
   int num = 42;
   void *ptr = &num;
   printf("%d", *(int*)ptr); // Cast to int* before dereferencing
-  ```
+
+---------------------------------------------------------------------------------------  
 
 **Q2: Output of `printf("%d")`**  
 - **Undefined Behavior**: Missing argument for `%d`. May print garbage or crash.
 
+---------------------------------------------------------------------------------------  
 **Q3: Print `%` Symbol**  
 - Escape `%` with another `%`:  
-  ```c
   printf("100%% Complete"); // Output: "100% Complete"
-  ```
+---------------------------------------------------------------------------------------  
 
 **Q4: Dangling Pointers vs. Memory Leaks**  
 - **Dangling Pointer**: Points to deallocated memory. Accessing it ⚠️ crashes or corrupts data.  
 - **Memory Leak**: Allocated memory is orphaned (no pointers reference it). Wastes resources but doesn't cause immediate crashes.  
-  ```c
+  
   // Dangling pointer example
   int *ptr = malloc(sizeof(int));
   free(ptr); // ptr is now dangling!
-  ```
+---------------------------------------------------------------------------------------  
 
 **Q5: Free Memory Without `free()`**  
 - ❌ **No portable way**. Workarounds:  
@@ -236,22 +246,22 @@ Here are concise implementations for each problem from the provided link:
   - Restructure code to use automatic variables.  
   - Let the OS reclaim memory after program exit (not recommended).
 
+---------------------------------------------------------------------------------------  
 **Q6: Use of `%n` in `printf()`**  
 - Writes the **number of characters printed** to a pointer:  
-  ```c
+  
   int count;
   printf("Hello%n World", &count); // count = 5
-  ```
+---------------------------------------------------------------------------------------  
 
 **Q7: `#pragma` Directive**  
 - Provides compiler-specific instructions (e.g., disable warnings, control alignment):  
-  ```c
   #pragma pack(1) // Set struct alignment to 1 byte
   #pragma warning(disable: 4996) // Disable warning in MSVC
-  ```
 
+---------------------------------------------------------------------------------------  
 **Q8: Macro Output**  
-```c
+
 #include <stdio.h>
 #define SQUARE(a) (a)*(a)
 int main() {
@@ -259,17 +269,24 @@ int main() {
     int x = 3;
     printf("%d\n", SQUARE(++x)); // Undefined! May be 20 or 25
 }
-```
 - **Why undefined?** `SQUARE(++x)` expands to `(++x)*(++x)`, modifying `x` twice between sequence points.
 
+---------------------------------------------------------------------------------------  
 **Q9: Struct Sizes with Bit-Fields**  
-```c
+
 struct A { // Size = 1 byte (3+4+1 bits = 8 bits)
     unsigned char c1 : 3;
     unsigned char c2 : 4;
     unsigned char c3 : 1;
 };
 
+This structure defines three bit-fields with widths totaling 3 + 4 + 1 = 8 bits — exactly one byte.
+Even though they're declared using unsigned char, the underlying type usually doesn't 
+affect bit-field allocation as long as total bits fit into a standard unit (often int or smallest alignment boundary)
+
+sizeof(struct A) = 1 byte
+
+---------------------------------------------------------------------------------------  
 struct B { // Size = 2 bytes
     unsigned char c1 : 3;
     unsigned char : 0; // Force next bit-field to new byte
@@ -279,20 +296,23 @@ struct B { // Size = 2 bytes
 ```
 - **Key**: `unsigned char : 0` aligns next field to a new byte boundary.
 
+---------------------------------------------------------------------------------------  
 **Q10: Bubble Sort**  
 Repeatedly swaps adjacent elements if in wrong order:  
-```c
-void bubbleSort(int arr[], int n) {
-    for (int i = 0; i < n-1; i++)
-        for (int j = 0; j < n-i-1; j++)
-            if (arr[j] > arr[j+1]) {
-                int temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-            }
-}
-```
 
+void bubbleSort(int arr[], int n) {
+
+	for (int i = 0; i < n-1; i++)
+		for (int j = 0; j < n-i-1; j++)
+			if (arr[j] > arr[j+1]) {
+				int temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp;
+			}
+}
+
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------  
 **Q11: Struct vs Union**  
 | **Struct**                          | **Union**                          |
 |-------------------------------------|------------------------------------|
@@ -308,42 +328,37 @@ void bubbleSort(int arr[], int n) {
 - **rvalue**: Temporary value (e.g., literals, expressions). Can only appear on the right of `=`.  
   ```c
   int b = a + 5; // `a + 5` is rvalue
-  ```
 
 **Q13: Program-OS Linking Structure**  
 - **`FILE` structure**: Bridges program and OS for file I/O operations. Defined in `<stdio.h>`.  
-  ```c
   FILE *fp = fopen("file.txt", "r"); // Uses OS resources
-  ```
 
+---------------------------------------------------------------------------------------  
 **Q14: Right-Shift Output**  
-```c
+
 #include <stdio.h>
 int main() {
     int a = -2;          // Binary: 111...1110 (32-bit two's complement)
     printf("%x", a >> 3); // Output: fffffffd (sign extension)
 }
-```
+---------------------------------------------------------------------------------------  
 - **Why?** Arithmetic right shift preserves sign. `-2 >> 3` = `-1` → Hex: `0xffffffff` (32-bit).
 
 **Q15: String to Integer**  
 - Use `atoi()` (simple) or `strtol()` (robust):  
-  ```c
-  #include <stdlib.h>
-  int num = atoi("123"); // num = 123
-  ```
+  
+#include <stdlib.h>
+int num = atoi("123"); // num = 123
+
 - **Manual conversion**:  
-  ```c
   int strToInt(const char *str) {
       int res = 0, sign = 1, i = 0;
       if (str[0] == '-') { sign = -1; i++; }
       for (; str[i]; i++) res = res * 10 + (str[i] - '0');
       return sign * res;
   }
-  ```
 
-
-==================
+============================================================================================================
 Here is a comprehensive list of  C interview questions and answers** categorized by key topics for clarity:
 
 ---
@@ -382,14 +397,14 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 10. **What is a memory leak?**  
     *Answer:* Dynamically allocated memory not freed, reducing available memory over time.
 
----
+----------------------------------------------------------------------------------------
 
 ### **Pointers**
 11. **How to access a hardware register?**  
     *Answer:* `volatile uint8_t *reg = (volatile uint8_t*)0x1234;`
 
 12. **What is a function pointer?**  
-    *Answer:* A pointer storing a function’s address (e.g., void (*func_ptr)(int) = &foo;`).
+    *Answer:* A pointer storing a function’s address (e.g., void (*func_ptr)(int) = &foo;).
 
 13. **What is a NULL pointer?**  
     *Answer:* A pointer that does not point to valid memory (dereferencing causes crashes).
@@ -400,7 +415,8 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 15. **What is a void pointer?**  
     *Answer:* A generic pointer type (e.g., `void *ptr`), requiring casting before use.
 
----
+----------------------------------------------------------------------------------------
+
 
 ### **Interrupts**
 16. **What is an ISR?**  
@@ -418,14 +434,14 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 20. **What is a watchdog timer?**  
     *Answer:* Resets the system if not periodically refreshed, preventing hangs.
 
----
+----------------------------------------------------------------------------------------
 
 ### **Bit Manipulation**
 21. **Set bit 3 of a register:**  
-    *Answer:* `REG |= (1 << 3);`
+    *Answer:*  REG |= (1 << 3);
 
 22. **Clear bit 5:**  
-    *Answer:* REG &= ~(1 << 5);`
+    *Answer:* REG &= ~(1 << 5);
 
 23. **Toggle bit 2:**  
     *Answer:* REG ^= (1 << 2);`
@@ -436,7 +452,7 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 25. **What is a bit field?**  
     *Answer:* A struct member with a specified bit width (e.g., `uint8_t flag : 1;`).
 
----
+----------------------------------------------------------------------------------------
 
 ### **Peripherals**
 26. **Explain UART communication.**  
@@ -454,7 +470,7 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 30. **How to configure ADC?**  
     *Answer:* Set resolution, reference voltage, clock, and enable the ADC module.
 
----
+----------------------------------------------------------------------------------------
 
 ### **RTOS**
 31. **What is an RTOS?**  
@@ -472,7 +488,7 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 35. **What is a task/thread?**  
     *Answer:* Independent execution unit with its own stack and state.
 
----
+----------------------------------------------------------------------------------------
 
 ### **Debugging**
 36. **JTAG vs. SWD?**  
@@ -490,17 +506,12 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 40. **Use of logic analyzers?**  
     *Answer:* Capture and analyze digital signals (e.g., SPI, I2C timing).
 
----
+----------------------------------------------------------------------------------------
 
 ### **Advanced Topics**
-41. **What is DMA?**  
-    *Answer:* Direct Memory Access—transfers data without CPU (e.g., ADC to memory).
 
 42. **Explain CAN bus.**  
     *Answer:* Robust vehicle communication protocol (e.g., differential signaling, message IDs).
-
-43. **What is a bootloader?**  
-    *Answer:* Firmware to update the main application (e.g., via UART/USB).
 
 44. **How to reduce power consumption?**  
     *Answer:* Use sleep modes, disable unused peripherals, lower clock speed.
@@ -508,7 +519,7 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 45. **What is a circular buffer?**  
     *Answer:* FIFO structure with head/tail pointers for efficient data streaming.
 
----
+----------------------------------------------------------------------------------------
 
 ### **Code Optimization**
 46. **Use of `inline` keyword?**  
@@ -526,7 +537,7 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 50. **How to reduce code size?**  
     *Answer:* Use compiler optimizations (-Os), remove unused code, and prefer macros.
 
----
+----------------------------------------------------------------------------------------
 
 ### **Design Patterns**
 51. **What is a state machine?**  
@@ -543,8 +554,7 @@ Here is a comprehensive list of  C interview questions and answers** categorized
 
 55. **What is a hardware abstraction layer (HAL)?**  
     *Answer:* Code layer isolating hardware specifics for portability (e.g., `HAL_GPIO_WritePin()`).
-
----
+----------------------------------------------------------------------------------------
 
 ### **Miscellaneous**
 56. **What is endianness?**  
@@ -584,7 +594,7 @@ Here are the **answers and explanations** to the first 10 important **bitwise qu
 | Left Shift  | `<<`   | Shifts bits left (multiplies)  |                               |
 | Right Shift | `>>`   | Shifts bits right (divides)    |                               |
 
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **2. Write a program to check if a number is even or odd using bitwise operator.**
 
@@ -603,31 +613,25 @@ int main() {
 }
 
 
+-----------------------------------------------------------------------------------------------
 🔹 **Explanation**: The LSB of an odd number is always 1.
-
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **3. How do you set a particular bit in a number?**
 
-num = num | (1 << n);
-
-🔹 **Explanation**: Sets the **nth bit** to 1.
----
+num = num | (1 << n);     🔹 **Explanation**: Sets the **nth bit** to 1.
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **4. How do you clear a particular bit?**
 
-num = num & ~(1 << n);
-
-🔹 **Explanation**: Clears the **nth bit** (makes it 0).
-
----
+num = num & ~(1 << n);    🔹 **Explanation**: Clears the **nth bit** (makes it 0).
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **5. How do you toggle (invert) a particular bit?**
 
-num = num ^ (1 << n);
+num = num ^ (1 << n);    🔹 **Explanation**: If bit is 0, becomes 1; if 1, becomes 0.
 
-🔹 **Explanation**: If bit is 0, becomes 1; if 1, becomes 0.
-
+-----------------------------------------------------------------------------------------------
 ### ✅ **6. How do you test if a bit is set or not?**
 
 
@@ -637,8 +641,7 @@ else
     printf("Bit %d is not set\n", n);
 
 🔹 **Explanation**: Checks if **nth bit is 1**.
-
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **7. How do you turn off the rightmost set bit?**
 
@@ -646,7 +649,7 @@ num = num & (num - 1);
 
 🔹 **Explanation**: This clears the **lowest set bit (1)**.
 
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **8. Write a macro to swap two bits in a byte.**
 
@@ -657,7 +660,7 @@ num = num & (num - 1);
 
 🔹 **Explanation**: Swaps bits at position `i` and `j` if they differ.
 
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **9. Count number of 1’s in a binary number (Brian Kernighan’s Algorithm).**
 
@@ -671,25 +674,21 @@ int countSetBits(int num) {
 }
 🔹 **Explanation**: Fast and efficient way to count set bits.
 
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **10. Write a macro to extract the nth bit of a number.**
-
 
 #define GET_BIT(num, n) ((num >> n) & 1)
 
 
 🔹 **Explanation**: Returns the value (0 or 1) of bit at position `n`.
 
----
+-----------------------------------------------------------------------------------------------
 
 #### 🧠 **Advanced Bitwise Techniques**
 
---
-
 ### ✅ **11. Find the position of the only set bit in a number (Power of 2)**
 
-```c
 int findPosition(unsigned int n) {
     if (n == 0 || (n & (n - 1)) != 0)
         return -1; // Not a power of 2 or zero
@@ -701,60 +700,50 @@ int findPosition(unsigned int n) {
     }
     return pos;
 }
-```
 
+-----------------------------------------------------------------------------------------------
 🔹 **Explanation**: Valid only when exactly one bit is set.
-
----
 
 ### ✅ **12. Reverse the bits of an 8-bit number**
 
 unsigned char reverseBits(unsigned char n) {
-    unsigned char rev = 0;
-    for (int i = 0; i < 8; i++) {
-        rev <<= 1;
-        rev |= (n & 1);
-        n >>= 1;
-    }
-    return rev;
+	unsigned char rev = 0;
+	for (int i = 0; i < 8; i++) {
+		rev <<= 1;
+		rev |= (n & 1);
+		n >>= 1;
+	}
+	return rev;
 }
-```
 
 🔹 For **32-bit** version, just change the loop to 32 iterations and variable type to `unsigned int`.
 
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **13. Check if a number is a power of 2 using bitwise**
 
-```c
 int isPowerOf2(int n) {
     return (n > 0) && ((n & (n - 1)) == 0);
 }
-```
 
 🔹 **Explanation**: Powers of 2 have only one bit set.
 
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **14. Multiply a number by 2 using bitwise**
 
-```c
 result = num << 1;
-```
 
 🔹 Left shift multiplies by 2.
 
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **15. Divide a number by 2 using bitwise**
 
-```c
 result = num >> 1;
-```
 
 🔹 Right shift divides by 2 (for unsigned numbers).
-
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **16. Function to perform Bit Rotation (Left and Right)**
 
@@ -764,6 +753,8 @@ unsigned int leftRotate(unsigned int x, int n) {
     return (x << n) | (x >> (32 - n));
 }
 
+-----------------------------------------------------------------------------------------------
+
 
 **Right Rotate (n-bit):**
 
@@ -771,21 +762,17 @@ unsigned int rightRotate(unsigned int x, int n) {
     return (x >> n) | (x << (32 - n));
 }
 
+-----------------------------------------------------------------------------------------------
 
-🔹 Assumes `x` is 32-bit.
+🔹 Assumes `x` is 32-bit.     
 
----
-
-### ✅ **17. Swap two numbers using XOR**
+### ✅ **17. Swap two numbers using XOR** 🔹 Works without temporary variable.
 
 a = a ^ b;
 b = a ^ b;
 a = a ^ b;
 
-
-🔹 Works without temporary variable.
-
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **18. Isolate the rightmost 1 bit of an integer**
 
@@ -793,7 +780,7 @@ int isolated = num & -num;
 
 🔹 **Explanation**: Works due to 2’s complement representation.
 
----
+-----------------------------------------------------------------------------------------------
 
 ### ✅ **19. Turn on all bits to the right of the rightmost 0**
 
@@ -814,14 +801,12 @@ int haveOppositeSigns(int x, int y) {
 
 ======================================================================================================
 
-
 ===================================================================================================
 
 Amazon Interview Question:-
 ===============================
 
 1> To get mirror image of a binary tree.?
-
 
 to get the mirror image of the binary tree we have to just traverse the tree in post
 oreder and in a bottom up fashion we have to swap the right son to left
@@ -839,7 +824,6 @@ void MirrorImage(struct node *R)
         R->right=temp;
 }
 
-
 =======================================================================================================================================================
 
 #include<stdio.h>
@@ -850,25 +834,23 @@ void f1(int a[]){
                 p=&a[i]; //error
         *p=0;
 }
-void main()
-{
+void main(){
         int a[10];
         f1(a);
 }
-~      
 
 - i++ > 1 is false for i = 0 and i = 1, so p = &a[i] is never executed.
 - As a result, p remains NULL (since it's initialized to 0).
 - Then *p = 0; dereferences a null pointer → undefined behavior / segmentation 
 
 ANSWER: Segmentation fault.
-ANSWER: Segmentation fault.
 P is not assigned with any address as while loop does not execute (since i++ is
 not greater than 3). thereby p is NULL , *p will result in error.
 The same program executes fine if while executes ( change condition in loop as -
 while(i++ < 3) )
 ===================================================================================================================================================
-Count the number of set bits in a number. Now optimize for speed. Now optimize for size
+
+2) Count the number of set bits in a number. Now optimize for speed. Now optimize for size
 
 #include <stdio.h>
 
@@ -915,7 +897,7 @@ function printLinkedLits(Node head)
 Recursion will use the internal stack space .. you can do following::
 First traverse the link list and reverse it then traverse it and print 
 it  If there is any constraint that list should be as it is then reverse it again
-======================================================================================================================================================================
+==============================================================================================================================================
 Count the number of set bits in a number without using a loop.
 
 int countBits( int n )
@@ -924,7 +906,7 @@ int countBits( int n )
         if( n&1 ) return 1 + countBits( n>>1 );
         else return countBits( n >> 1 );
 }
-==================================================================================================================================================================================================================================
+=========================================================================================================================================================
 What is the difference between functions, call back functions and function pointers?
 
 
@@ -949,8 +931,6 @@ Use cases:
 - Callback tables
 
 Callback Functions :: A callback is just a function passed as an argument to another function — often used to customize behavior.
-
-
 
 #include <stdio.h>
 
@@ -981,7 +961,8 @@ int main() {
 
     return 0;
 }
-===============================================================================================================================================================================================================================================================================
+===============================================================================================================================================
+
 What are call back functions?
 A callback function is a function that is called through a function pointer
 
@@ -1020,11 +1001,11 @@ How is the memory allocation done for a union?
 A union will allocate only the space required by one element(the element that occupies the maximum size).
 Suppose you have a union consisting of 4 variables(of different data types),than the union will allocate space onlu to the variable that requires the maximum memory space. For example:
 
-union shirt
-{
-char size;
-int chest;
+union shirt{
+	char size;
+	int chest;
 }mine;
+
 The union variable 'mine' will be allocate only 4 bytes(the compiler knows,that tha character will require only one byte,while an integer needs 4 bytes.
 It allots 'mine' a total of only 4 bytes
 
@@ -1058,17 +1039,17 @@ This has to do with padding. Structures are usually padded with extra bytes for 
 If a number is power of 2
 
 for unsigned integer nummbers:
-bool isPow2(int n)
-{
+bool isPow2(int n){
 return !(n & (n-1)) && n;
 }
+
 ============================================================================================================================================================
 
 for unsigned integer numbers:
-bool isPow2(int n)
-{
+bool isPow2(int n){
 return !(n & (n-1)) && n;
 }
+
 =======================================================
 
 return num&(num-1)==0
@@ -1103,8 +1084,7 @@ Write code for memcpy function
 
 Basic first version - copies one byte at a time.
 
-void memcpy(void* src, void* dst, size_t len)
-{
+void memcpy(void* src, void* dst, size_t len){
 char* p = (char*)src;
 char* q = (char*)dst;
 while(len--)
@@ -1113,14 +1093,12 @@ while(len--)
 
 
 
-int memcpy(void* dest,const void* src,int num)
-{
+int memcpy(void* dest,const void* src,int num){
 while(num--)
 *(char*)dest=*(char*)src;
 dest=(char*)dest+1;
 src=(char*)src+1;
 }
-
 
 ====================================================================================
 
@@ -1144,6 +1122,7 @@ System call? What happens in low level.
 System calls are for kernel service. Using 0x80 INT, it jumps to kernel context.
 For this u shd have asmlinkage pre-knowledge is required.
 While implementation, u need to increment macro count from particular header file then define ur call and u need to put in corresponds...location
+
 ====================================================================================
 struct {
 char c;
@@ -1201,22 +1180,21 @@ The following are declared but not defined:
 # enum myEnum;
 
 The following are defined:
-# int var;
-# void function()
-# {
-# }
-#  
-# struct myStruct {
-# // stuff in here
-# };
-#  
-# class myClass {
-# // stuff in here
-# };
-#  
-# enum myEnum {
-# // stuff in here
-# };
+ int var;
+ void function(){
+ }
+  
+ struct myStruct {
+ // stuff in here
+ };
+  
+ class myClass {
+ // stuff in here
+ };
+  
+ enum myEnum {
+ // stuff in here
+ };
 
 
 Why extern int var; is declared and int var; is defined?
@@ -1315,12 +1293,10 @@ volatile unsigned long *t0, *t2;
 
 *((volatile unsigned short *) 0xfffece08) = 0x03FF;
 
-
    volatile unsigned int *MuxConfReg;
    MuxConfReg =(volatile unsigned int *) ((unsigned int) FUNC_MUX_CTRL_0); //Configuration Registers 0xfffe1000
 
   *MuxConfReg &= ~(0x02000000);   /* bit 25 */
-
 
 ----------------------------------------------------------------
 volatile u32 *macen = (volatile u32*)MAC0_ENABLE;   /* 0xB0520000 */
@@ -1439,15 +1415,11 @@ BIT-FIELDS
 =================================================================
 What is difference between define and typedef in c?
 
- Answer
-
-defines are handled by a preprocessor (a program run before the actual c compiler) which works like replace all in you editor.
+Answer:: Defines are handled by a preprocessor (a program run before the actual c compiler) which works like replace all in you editor.
 
 Typedef is handled by the c compiler itself, and is an actual definition of a new type.
 
-Answer
-
-The distinction given between #define and typedef has one significant error: typedef does not in fact create a new type. According to Kernighan & Richie, the authors of the authoritative and universally acclaimed book, "The C Programming Language":
+Answer :: The distinction given between #define and typedef has one significant error: typedef does not in fact create a new type. According to Kernighan & Richie, the authors of the authoritative and universally acclaimed book, "The C Programming Language":
 
 It must be emphasized that a typedef declaration does not create a new type in any sense; it merely adds a new name for some existing type. Nor are there any new semantics: variables declared this way have exactly the same properties as variables whose declarations are spelled out explicitly. In effect, typedef is like #define, except that since it is interpreted by the compiler, it can cope with textual substitutions that are beyond the capabilities of the preprocessor.
 
@@ -1514,7 +1486,6 @@ existing type. defines are handled by the preprocessor while typedefs are
 handled by the C compiler itself.
 ====================================================================================
 
-
 Is this a correct method of allocating a 3-dimensional array?
 
 /* assume all malloc's succeed */
@@ -1531,11 +1502,7 @@ Is this a correct method of allocating a 3-dimensional array?
         for ( j = 0; j < ROW; j++ )
             ptr[i][j] = malloc ( COL * sizeof ***ptr );
 
-
-
-
 ====================================================================================
-
  typedef Vs #define
 
 There are two differences between define and typedef.
@@ -1561,10 +1528,7 @@ a10 a, b, c; // create three 10-int arrays
 Code:
 
 typedef int (*func_p) (int);
-func_p fp // func_p is a pointer to a function that
-          // takes an int and returns an int
-
-
+func_p fp // func_p is a pointer to a function that takes an int and returns an int.
 
 
 What is the difference between typedef & Macros?
@@ -1591,6 +1555,7 @@ unsigned banana i; /*illegal*/
 What's the difference between using a typedef or a define for a user-defined type?
 
 In general, typedefs are preferred, in part because they can correctly encode pointer types. For example, consider these declarations:
+
 typedef char *String_t;
 #define String_d char *
 String_t s1, s2;
@@ -1657,28 +1622,82 @@ int (*p)[10];
 =========================================================================================================================================
 What is a void pointer? Why can't we perform arithmetic on a void * pointer? 
 
-The void data type is used when no other data type is appropriate. A void pointer is a pointer that may point to any kind of object at all. It is used when a pointer must be specified but its type is unknown.
+The void data type is used when no other data type is appropriate.
+A void pointer is a pointer that may point to any kind of object at all. 
+It is used when a pointer must be specified but its type is unknown.
 
-The compiler doesn't know the size of the pointed-to objects incase of a void * pointer. Before performing arithmetic, convert the pointer either to char * or to the pointer type you're trying to manipulate 
-===========================================================================================================================================================================
+The compiler doesn't know the size of the pointed-to objects incase of a void * pointer.
+Before performing arithmetic, convert the pointer either to char * or to the pointer type you're trying to manipulate 
+====================================================================================================================================================
 One dimensional array
 
 int *myarray = malloc(no_of_elements * sizeof(int));
 
 //Access elements as myarray[i]
 
-
 Two dimensional array
 Method1
 int **myarray = (int **)malloc(no_of_rows * sizeof(int *));
-for(i = 0; i < no_of_rows; i++)
-{
- myarray[i] = malloc(no_of_columns * sizeof(int));
+for(i = 0; i < no_of_rows; i++){
+	myarray[i] = malloc(no_of_columns * sizeof(int));
 }
 
 // Access elements as myarray[i][j]
 
-===========================================================================================================================================================================
+
+-----
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int rows, cols;
+    printf("Enter number of rows and columns: ");
+    scanf("%d %d", &rows, &cols);
+
+    // Allocate memory for an array of row pointers
+    int **myArray = (int **)malloc(rows * sizeof(int *));
+    if (myArray == NULL) {
+        printf("❌ Allocation failed\n");
+        return 1;
+    }
+
+    // Allocate memory for each row
+    for (int i = 0; i < rows; i++) {
+        myArray[i] = (int *)malloc(cols * sizeof(int));
+        if (myArray[i] == NULL) {
+            printf("❌ Allocation failed for row %d\n", i);
+            return 1;
+        }
+    }
+
+    // Input elements
+    printf("Enter matrix elements row-wise:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &myArray[i][j]);
+        }
+    }
+
+    // Display matrix
+    printf("\nMatrix:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%4d", myArray[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Free memory row by row
+    for (int i = 0; i < rows; i++) {
+        free(myArray[i]);
+    }
+    free(myArray);
+
+    return 0;
+}
+
+==============================================================================================================================================
 
 Below is a curated list of 50 advanced and challenging C programming questions, along with concise answers or code examples. 
 These cover a range of topics including pointers, memory management, data structures, tricky logic, and language-specific behavior.
@@ -1695,12 +1714,10 @@ These cover a range of topics including pointers, memory management, data struct
    Pointers that do not point to a valid object of the appropriate type, often due to freeing the pointer's memory before use[1][2].
 
 4. **How do you check if a system is little endian or big endian?**
-   ```c
    unsigned int x = 0x76543210;
    char *c = (char*) &x;
    if (*c == 0x10) printf("Little Endian");
    else printf("Big Endian");
-   ```
 
 
 5. **What is pointer arithmetic?**  
@@ -1741,8 +1758,8 @@ These cover a range of topics including pointers, memory management, data struct
    Use three variables and a function that compares values and returns the largest using conditional operators[5].
 
 13. **Implement binary search in C.**
-   ```c
-   int binarySearch(int arr[], int l, int r, int x) {
+   
+    int binarySearch(int arr[], int l, int r, int x) {
        while (l  -1` in C?**  
    Always true, because `sizeof` returns unsigned type, and `-1` becomes a large unsigned value. But some compilers may handle warnings[7].
 
@@ -1764,7 +1781,6 @@ These cover a range of topics including pointers, memory management, data struct
    
    int **arr = malloc(rows * sizeof(int*));
    for (int i = 0; i  (b) ? (a) : (b))
-   ```
 
 50. **How do you prevent double free or invalid free in C?**  
    Set pointer to NULL after freeing it. Always check if pointer is NULL before freeing.
@@ -1830,21 +1846,19 @@ Some of the **most challenging C programming interview questions for 2025** are 
 
 - **Generate all permutations of a string recursively. Explain the underlying logic and the memory handling with stack frames[6].**
 
-
 ===================================================================================================================================
 
 Here are 50 expert-level C programming interview questions and answers, covering complex concepts, advanced optimization techniques, and system-level programming challenges:
 
 ### **I. Advanced Pointers & Memory Management**
 1. **Triple pointer dereference in multi-dimensional arrays**  
-   ```c
-   int ***arr = malloc(3 * sizeof(int**));
-   for(int i=0; i<3; i++) {
-     arr[i] = malloc(4 * sizeof(int*));
-     for(int j=0; j<4; j++) 
-         arr[i][j] = malloc(5 * sizeof(int));
-   }
-   ```
+   
+int ***arr = malloc(3 * sizeof(int**));
+       for(int i=0; i<3; i++) {
+	       arr[i] = malloc(4 * sizeof(int*));
+	       for(int j=0; j<4; j++) 
+		       arr[i][j] = malloc(5 * sizeof(int));
+       }
    **Purpose**: Efficiently represent 3D data structures where dimensions change dynamically. Freeing requires nested loops in reverse allocation order .  
 
 2. **Restrict keyword optimization**  
@@ -1856,15 +1870,17 @@ Here are 50 expert-level C programming interview questions and answers, covering
   
    **Compiler effect**: Allows assuming no pointer aliasing, enabling CPU pipeline optimizations and vectorization .  
 
+----------------------------------------------------------------------------------------------------
 3. **Self-modifying function pointers**  
    
    void (*func)(void) = original;
    func(); // Calls original
    func = modified;
    func(); // Calls modified
-   ```
-   **Use case**: Runtime behavior switching (e.g., encryption algorithms). Requires non-const pointers and correct function signatures .  
+   
+**Use case**: Runtime behavior switching (e.g., encryption algorithms). Requires non-const pointers and correct function signatures .  
 
+----------------------------------------------------------------------------------------------------
 4. **Dangling pointer mitigation**  
   
    int *ptr = malloc(sizeof(int));
@@ -1873,33 +1889,33 @@ Here are 50 expert-level C programming interview questions and answers, covering
    
    **Post-free actions**: Always nullify pointers; use static/dynamic analysis tools (Valgrind) to detect access violations .  
 
+----------------------------------------------------------------------------------------------------
 5. **Variable-length array (VLA) vs. alloca()**  
    - **VLA**: `int arr[n];` – Stack-allocated, limited scope, automatic deallocation  
    - **alloca()**: `int *arr = alloca(n*sizeof(int));` – Explicit stack allocation, no standard library free needed  
    **Risk**: Stack overflow with large `n`; prefer heap for >1KB allocations .  
 
----
+----------------------------------------------------------------------------------------------------
 
 ### **II. Concurrency & System Programming**
 6. **Atomic operations without locks**  
-   ```c
    __atomic_add_fetch(&counter, 1, __ATOMIC_SEQ_CST);
-   ```
    **Mechanism**: Hardware-supported atomic instructions (e.g., x86 LOCK prefix). Ensures sequential consistency .  
 
+----------------------------------------------------------------------------------------------------
 7. **Volatile for memory-mapped I/O**  
-   ```c
+   
    volatile uint32_t *reg = (volatile uint32_t*)0xFFFF0000;
    *reg = ENABLE_MASK; // Writes directly to hardware
-   ```
    **Compiler barrier**: Prevents reordering/elimination of accesses. Essential for embedded systems .  
 
+----------------------------------------------------------------------------------------------------
 8. **Signal handler reentrancy**  
-   ```c
+ 
    void handler(int sig) {
      write(STDOUT_FILENO, "Safe\n", 6); // Async-signal-safe
    }
-   ```
+ 
    **Safe functions**: Only `write()`, `_exit()`, `sig_atomic_t` assignments. Avoid `malloc/printf` .  
 
 9. **Custom memory pool allocator**  
@@ -1912,68 +1928,63 @@ Here are 50 expert-level C programming interview questions and answers, covering
    ```
    **Advantage**: 10-100x faster than `malloc` for fixed-size objects by avoiding fragmentation .  
 
----
+----------------------------------------------------------------------------------------------------
 
 ### **III. Compiler & Optimization Tricks**
 10. **Dead code elimination via `__attribute__((used))`**  
-    ```c
     __attribute__((used)) void debug_util() {...}
     ```
     **Force inclusion**: Overrides linker's dead code removal for critical debugging functions .  
 
+----------------------------------------------------------------------------------------------------
 11. **Branch prediction hints**  
-    ```c
     if (__builtin_expect(ptr != NULL, 1)) { ... }
-    ```
     **CPU pipelining**: Guides compiler to prefetch likely paths. >20% speedup in hot paths .  
 
+----------------------------------------------------------------------------------------------------
 12. **Strict aliasing violations**  
-    ```c
     float f = 1.0;
     int i = *(int*)&f; // Undefined behavior!
-    ```
     **Legal approach**: Use `memcpy` or `union` (C99-compliant) to avoid misaligned accesses .  
 
+----------------------------------------------------------------------------------------------------
 13. **`const` vs. `#define` for constants**  
     - **`const int MAX=100;`**: Type-safe, debugger-visible, stored in memory  
     - **`#define MAX 100`**: Text substitution, no memory allocation  
     **Preference**: Use `const` unless memory-constrained .  
 
----
+----------------------------------------------------------------------------------------------------
 
 ### **IV. Undefined Behavior & Edge Cases**
 14. **Sequence point violations**  
-    ```c
     int i = 0;
     printf("%d %d", i++, i++); // UB: Unspecified order
-    ```
     **Rule**: Modify variables max once between sequence points (e.g., `;`, `&&`, `||`) .  
 
+----------------------------------------------------------------------------------------------------
 15. **NULL pointer dereference on Linux**  
     **OS behavior**: On x86, address 0-4096 is unmapped → SIGSEGV. ARM/embedded may allow 0x0 accesses .  
+----------------------------------------------------------------------------------------------------
 
 16. **Signed integer overflow**  
-    ```c
     int32_t x = INT_MAX;
     x += 1; // UB: Compiler may optimize away checks
-    ```
+	
     **Solution**: Use `-fwrapv` flag or `uint32_t` for defined wrapping .  
 
+----------------------------------------------------------------------------------------------------
 17. **Pointer provenance**  
-    ```c
     int arr[10];
     int *p = &arr[0];
     p += 20; // UB even if no dereference
-    ```
     **Standard**: Pointer arithmetic must stay within object bounds .  
 
----
+-------------------------------------------------------------------------------------------
 
 ### **V. Data Structures & Bit Manipulation**
 18. **XOR linked list**  
     
     struct Node { int data; uintptr_t npx; }; // npx = prev ^ next
-    ```
     **Advantage**: Doubly-linked list with single pointer storage. Tradeoff: Complex traversal .  
 
 19. **Bitfield endianness issues**  
@@ -1983,20 +1994,16 @@ Here are 50 expert-level C programming interview questions and answers, covering
     **Pitfall**: Layout depends on compiler/CPU. Use masks/shifts for portability .  
 
 20. **SIMD vectorization via GCC extensions**  
-    ```c
     typedef int v4si __attribute__((vector_size(16)));
     v4si a = {1,2,3,4}, b = {5,6,7,8};
     v4si c = a + b; // Parallel addition
-    ```
     **Performance**: 4x speedup on SSE/AVX-capable CPUs .  
 
----
+----------------------------------------------------------------------------------------------------
 
 ### **VI. Advanced Tooling & Debugging**
 21. **Non-intrusive breakpoints with `ptrace()`**  
-    ```c
     ptrace(PTRACE_ATTACH, pid, NULL, NULL);
-    ```
     **Use**: Debuggers modify target's .text section to insert `int 3` (0xCC) without recompilation .  
 
 22. **Custom stack unwinding**  
@@ -2012,10 +2019,9 @@ Here are 50 expert-level C programming interview questions and answers, covering
     **Mechanism**: Walk EBP/RBP chain (x86) or DWARF CFI (RISC) .  
 
 23. **Hotpatch with `LD_PRELOAD`**  
-    ```bash
     LD_PRELOAD=./mymalloc.so ./app
-    ```
-    **Override functions**: Implement custom `malloc/free` to intercept allocations .  
+    
+ **Override functions**: Implement custom `malloc/free` to intercept allocations .  
 
 ---
 
@@ -2072,6 +2078,158 @@ These challenging questions not only test **coding skills** but also probe **con
 #### 🔧 **Macros & Portability**
 
 21. What are bitfields in C? How are they used in embedded?
+
+
+Bitfields in C are a way to pack multiple logical fields into a single integer, allowing you to manipulate individual bits or small groups of bits efficiently. They're especially useful in **memory-constrained environments like embedded systems**, where saving space and controlling hardware registers precisely is vital.
+
+---
+
+### 🔧 What Is a Bitfield?
+
+A **bitfield** is a set of adjacent bits within a structure that represent individual flags or values. Here's the syntax:
+
+struct Flags {
+    unsigned int a : 1;   // 1-bit flag
+    unsigned int b : 3;   // 3-bit value
+    unsigned int c : 4;   // 4-bit value
+};
+
+Each field is given a **width** using the `:` operator. Internally, 
+C packs these fields into the smallest number of bytes possible (usually the size of the base type, like `int` or `char`).
+
+---
+
+### 🧪 Example Use Case (Embedded Register Simulation)
+
+struct ControlRegister {
+    unsigned int enable   : 1;
+    unsigned int mode     : 2;
+    unsigned int reserved : 5;
+};
+
+- This struct represents an **8-bit hardware control register**.
+- You can access individual bits like regular fields:
+
+  ctrl.enable = 1;
+  ctrl.mode = 2;
+
+---
+
+### 🚀 Why Are Bitfields Useful in Embedded?
+
+- ✅ **Precise control of hardware registers**: You can model memory-mapped registers with bit-level granularity.
+- ✅ **Space-efficient struct packing**: Reduces memory footprint, crucial on microcontrollers with limited RAM.
+- ✅ **Cleaner code**: Easier than manual bit masking (e.g., val &= ~(1 << n)`).
+
+---
+
+### ⚠️ Cautions When Using Bitfields
+
+| Issue | Why It Matters |
+|-------|----------------|
+| **Portability** | Behavior may vary between compilers (e.g., ordering, alignment) |
+| **No addressability** | You can't take the address of a bitfield member |
+| **No overflow protection** | Assigning `value` > max representable bits silently truncates |
+
+For hardware access, many embedded developers prefer manual bitmasking or unions over bitfields for full control.
+
+-----------
+
+Awesome — let’s dive into bitfields vs bitmasking with a hands-on embedded example.
+
+---
+
+### 🔧 Scenario: Simulating an 8-bit control register
+
+You're working with a hardware register that controls:
+- `enable` (1 bit)
+- `mode` (2 bits)
+- `interrupt` (1 bit)
+- `reserved` (4 bits)
+
+---
+
+### 🅰️ Option 1: Bitfields
+
+```c
+#include <stdio.h>
+
+struct ControlRegister {
+    unsigned int enable    : 1;
+    unsigned int mode      : 2;
+    unsigned int interrupt : 1;
+    unsigned int reserved  : 4;
+};
+
+int main(void) {
+    struct ControlRegister reg = {0};
+
+    reg.enable = 1;
+    reg.mode = 2;
+    reg.interrupt = 1;
+
+    printf("Enable: %d\n", reg.enable);
+    printf("Mode: %d\n", reg.mode);
+    printf("Interrupt: %d\n", reg.interrupt);
+}
+```
+
+✅ Pros:
+- Clean syntax
+- Easy to read and maintain
+- Logical grouping for hardware modeling
+
+⚠️ Cons:
+- Not guaranteed to match physical layout — compilers vary!
+- Can't access individual bits' addresses
+- Portability risk across architectures
+
+---
+
+### 🅱️ Option 2: Bitmasking (Manual Control)
+
+
+#include <stdio.h>
+
+#define ENABLE_BIT      0
+#define MODE_BITS_SHIFT 1
+#define MODE_MASK       0x06  // 2 bits: 00000110
+#define INTERRUPT_BIT   3
+
+int main(void) {
+    unsigned char reg = 0;
+
+    // Set bits
+    reg |= (1 << ENABLE_BIT);           // enable = 1
+    reg |= (2 << MODE_BITS_SHIFT);      // mode = 2
+    reg |= (1 << INTERRUPT_BIT);        // interrupt = 1
+
+    // Read values
+    int enable    = (reg >> ENABLE_BIT) & 0x01;
+    int mode      = (reg & MODE_MASK) >> MODE_BITS_SHIFT;
+    int interrupt = (reg >> INTERRUPT_BIT) & 0x01;
+
+    printf("Enable: %d\n", enable);
+    printf("Mode: %d\n", mode);
+    printf("Interrupt: %d\n", interrupt);
+}
+```
+
+✅ Pros:
+- Full control over layout and bit access
+- Guaranteed behavior across compilers
+- Ideal for direct register access via pointers
+
+⚠️ Cons:
+- Less readable
+- More prone to human error
+
+---
+
+In embedded development, the choice depends on:
+- Whether you’re accessing real hardware (`bitmasking` preferred)
+- Or simulating logic/UI or internal logic (`bitfields` OK for clarity)
+==============================================================================================
 22. How would you implement a register map using bitfields?
 23. What are the pros and cons of using bitfields vs bitwise macros?
 24. Write a macro to extract a 3-bit field from a byte starting at bit 4.
@@ -2112,10 +2270,10 @@ These challenging questions not only test **coding skills** but also probe **con
 47. What’s the result of `1 << 31` on a 32-bit system?
 48. Can you use signed int in bit fields?
 
-#### 📚 **Wrap-up/Conceptual**
 
+====================================================================================================================
 49. When should you avoid bitwise operations in C?
 50. What embedded debugging tools help with bit-level analysis?
 
-================================
+====================================================================================================================
 
