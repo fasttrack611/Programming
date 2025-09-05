@@ -52,6 +52,21 @@ Here are concise implementations for each problem from the provided link:
        return 0;
    }
 
+
+If a > b:
+a - b is positive → shift gives 0 → AND gives 0 → max = a
+If a < b:
+a - b is negative → shift gives -1 → AND gives (a - b) → max = a - (a - b) = b
+ Example with a = 25, b = 13:
+a - b = 12 → positive
+12 >> 31 = 0
+12 & 0 = 0
+max = 25 - 0 = 25
+ Example with a = 13, b = 25:
+a - b = -12 → negative
+-12 >> 31 = -1
+-12 & -1 = -12
+max = 13 - (-12) = 25
 ---------------------------------------------------------------------------------------  
 4. **Add two integers without `+`**  
   
@@ -141,6 +156,15 @@ Here are concise implementations for each problem from the provided link:
         return n <= 1 ? n : fib(n - 1) + fib(n - 2);
     }
     
+
+#include <stdio.h>
+#define FIB(n) ((n) <= 1 ? (n) : FIB((n) - 1) + FIB((n) - 2))
+
+int main() {
+    int num = 6;
+    printf("Fibonacci of %d is %d\n", num, FIB(num));
+    return 0;
+}
 
 ---------------------------------------------------------------------------------------  
 13. **Factorial with recursion**  
@@ -248,6 +272,7 @@ Here are concise implementations for each problem from the provided link:
 ---------------------------------------------------------------------------------------  
 
 **Q4: Dangling Pointers vs. Memory Leaks**  
+
 - **Dangling Pointer**: Points to deallocated memory. Accessing it ⚠️ crashes or corrupts data.  
 - **Memory Leak**: Allocated memory is orphaned (no pointers reference it). Wastes resources but doesn't cause immediate crashes.  
   
@@ -375,13 +400,69 @@ int num = atoi("123"); // num = 123
   }
 
 ============================================================================================================
-Here is a comprehensive list of  C interview questions and answers** categorized by key topics for clarity:
+Great question! In C and C++, the terms **"constant pointer"** and **"pointer to constant"** refer to two different concepts involving the `const` keyword and pointers.
 
 ---
 
-### **Basic Concepts**
-1. **What is Embedded C?**  
-   *Answer:* A subset of C tailored for embedded systems, emphasizing direct hardware access, resource constraints, and real-time operations.
+## 🧠 1. **Pointer to Constant (const data)**
+
+### ✅ Syntax:
+const int *ptr;
+
+### ✅ Meaning:
+- The **data** pointed to by `ptr` **cannot be modified** through `ptr`.
+- But the **pointer itself can be changed** to point to another location.
+
+### ✅ Example:
+int a = 10, b = 20;
+const int *ptr = &a;  // OK
+*ptr = 15;            // ❌ Error: cannot modify value through ptr
+ptr = &b;             // ✅ OK: pointer can point elsewhere
+
+## 🧠 2. **Constant Pointer (const pointer)**
+
+### ✅ Syntax:   int *const ptr;
+
+### ✅ Meaning:
+- The **pointer itself is constant**—it must always point to the same memory location.
+- But the **data at that location can be modified**.
+
+### ✅ Example:
+  
+int a = 10;
+int *const ptr = &a;  // OK
+*ptr = 15;            // ✅ OK: can modify value
+int b = 20;
+ptr = &b;             // ❌ Error: cannot change the pointer itself
+
+
+## 🧠 3. **Constant Pointer to Constant Data**
+
+### ✅ Syntax:
+  
+const int *const ptr;
+
+### ✅ Meaning:
+- **Neither** the pointer **nor** the data it points to can be changed.
+
+### ✅ Example:
+  
+int a = 10;
+const int *const ptr = &a;
+*ptr = 15;   // ❌ Error: cannot modify value
+int b = 20;
+ptr = &b;    // ❌ Error: cannot change pointer
+
+## 🔁 Summary Table
+
+| Declaration            | Can change pointer? | Can change data? |
+|------------------------|---------------------|------------------|
+| `const int *ptr`       | ✅ Yes              | ❌ No            |
+| `int *const ptr`       | ❌ No               | ✅ Yes           |
+| `const int *const ptr` | ❌ No               | ❌ No            |
+
+
+Would you like a diagram or a quiz to help reinforce this concept visually or interactively?
 
 2. **How does Embedded C differ from standard C?**  
    *Answer:* Embedded C includes hardware-specific features like register manipulation, ISRs, and minimal library use due to resource limitations.
@@ -2247,8 +2328,46 @@ In embedded development, the choice depends on:
 - Or simulating logic/UI or internal logic (`bitfields` OK for clarity)
 ==============================================================================================
 22. How would you implement a register map using bitfields?
+
+
+
+#include <stdint.h>
+#include <stdio.h>
+
+// Define a register map using bitfields
+typedef struct {
+    uint32_t mode       : 4;   // Bits 0–3
+    uint32_t status     : 4;   // Bits 4–7
+    uint32_t error_code : 8;   // Bits 8–15
+    uint32_t reserved   : 16;  // Bits 16–31
+} ControlRegister;
+
+int main() {
+    ControlRegister reg = {0};
+
+    // Set values
+    reg.mode = 0x5;
+    reg.status = 0xA;
+    reg.error_code = 0x3F;
+
+    // Access values
+    printf("Mode: %u\n", reg.mode);
+    printf("Status: %u\n", reg.status);
+    printf("Error Code: %u\n", reg.error_code);
+
+    return 0;
+}
+
+==============================================================================================
+
 23. What are the pros and cons of using bitfields vs bitwise macros?
+
+
+
+==============================================================================================
 24. Write a macro to extract a 3-bit field from a byte starting at bit 4.
+
+==============================================================================================
 25. Explain endianess and its impact on bit manipulation.
 
 #### 🔂 **Embedded Context Questions**
@@ -2270,14 +2389,18 @@ In embedded development, the choice depends on:
 37. Optimize a code snippet that sets 3rd and 5th bit of a byte.
 38. Explain `x ^ x = 0` and `x ^ 0 = x` and where it is used.
 
+
+====================================================================================================================
 #### 📦 **Bit Packing and Compression**
 
 39. How do you store 4 2-bit values in a single byte?
+====================================================================================================================
 40. How to extract and decode data from a packed structure?
+====================================================================================================================
 41. How to implement a simple checksum using XOR?
 42. Write code to simulate a parity bit generator.
 43. Write code to encode/decode a byte using bit masks.
-
+====================================================================================================================
 #### ⚠️ **Edge Cases and Interview Traps**
 
 44. What is undefined behavior in bit shifting (e.g., shifting by >= width)?
@@ -2320,7 +2443,7 @@ In embedded development, the choice depends on:
    - **Padding**: Inserted to align to natural word boundaries  
    - **Portability Warning**: Never assume bit positions across platforms  
 
----
+====================================================================================================================
 
 #### **2. Memory Layout & Packing**  
 4. **Calculate sizeof() for this struct:**  
@@ -2402,22 +2525,101 @@ In embedded development, the choice depends on:
        unsigned reserved : 3;
        unsigned flags : 9;  // URG|ACK|PSH|RST|SYN|FIN
    };
-     
+   
+   
+   
+   
+#include <stdio.h>
+#include <stdint.h>
+
+struct TCPHeader {
+    uint16_t src_port;
+    uint16_t dst_port;
+    uint32_t seq_num;
+    uint32_t ack_num;
+    unsigned data_offset : 4;
+    unsigned reserved : 3;
+    unsigned flags : 9;
+};
+
+// Function to decode flags
+void decode_flags(unsigned flags) {
+    const char *flag_names[] = {
+        "FIN", "SYN", "RST", "PSH", "ACK", "URG", "ECE", "CWR", "NS"
+    };
+
+    printf("TCP Flags Set: ");
+    for (int i = 0; i < 9; i++) {
+        if (flags & (1 << i)) {
+            printf("%s ", flag_names[i]);
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    struct TCPHeader tcp;
+
+    // Sample values
+    tcp.src_port = 12345;
+    tcp.dst_port = 80;
+    tcp.seq_num = 1000;
+    tcp.ack_num = 2000;
+    tcp.data_offset = 5;
+    tcp.reserved = 0;
+    tcp.flags = (1 << 1) | (1 << 4);  // SYN and ACK
+    // Print header info
+    printf("Source Port: %u\n", tcp.src_port);
+    printf("Destination Port: %u\n", tcp.dst_port);
+    printf("Sequence Number: %u\n", tcp.seq_num);
+    printf("Acknowledgment Number: %u\n", tcp.ack_num);
+    printf("Data Offset: %u\n", tcp.data_offset);
+
+    // Decode flags
+    decode_flags(tcp.flags);
+
+    return 0;
+}
+   
+-------------------------------------------------------------------------------------------------------------------------------------     
 
 10. **IPv4 header with bit fields**  
      
-    struct IPv4Header {
-        unsigned ihl : 4;       // Header length
-        unsigned version : 4;   // Always 4
-        uint8_t dscp;           // DiffServ
-        uint16_t total_length;
-        // ... other fields
-        uint16_t frag_offset : 13;
-        unsigned flags : 3;     // DF|MF
-    };
-      
+#include <stdio.h>
+#include <stdint.h>
 
----
+struct IPv4Header {
+    unsigned ihl : 4;         // Header length
+    unsigned version : 4;     // Version
+    uint8_t dscp;             // DiffServ
+    uint16_t total_length;    // Total length
+    uint16_t frag_offset : 13;// Fragment offset
+    unsigned flags : 3;       // Flags
+};
+
+int main() {
+    struct IPv4Header header;
+
+    // Assign values
+    header.version = 4;
+    header.ihl = 5;
+    header.dscp = 0x2E;
+    header.total_length = 512;
+    header.frag_offset = 0x1FFF;
+    header.flags = 0x3;
+
+    // Print values
+    printf("Version: %u\n", header.version);
+    printf("IHL: %u\n", header.ihl);
+    printf("DSCP: 0x%X\n", header.dscp);
+    printf("Total Length: %u\n", header.total_length);
+    printf("Fragment Offset: %u\n", header.frag_offset);
+    printf("Flags: %u\n", header.flags);
+
+    return 0;
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------
 
 #### **5. Advanced Techniques**  
 11. **Union for raw/value access**  
@@ -2690,3 +2892,4 @@ In embedded development, the choice depends on:
      
 
 > **Pro Tip**: Use bit fields for memory-critical applications where readability matters, but switch to bitwise operations for performance-sensitive or portable code. Always document layout assumptions!
+
