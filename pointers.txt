@@ -1,121 +1,153 @@
 50 Pointer Interview Questions in C Programming
+
 1. Declare a pointer to an integer
 int *ptr;
 
+=========================================================================================
 2. Assign address of variable to pointer
 int num = 10;
 int *ptr = &num;
 
+=========================================================================================
 3. Access value through pointer
 printf("%d", *ptr); // Output: 10
+
+=========================================================================================
 4. What is pointer arithmetic?
 Operations on pointers (+, -, ++, --) based on data type size
 
-c
 int arr[3] = {10,20,30};
 int *p = arr;
 p++; // Now points to arr[1]
+=========================================================================================
 5. Difference between ptr + 1 and ptr++
 ptr + 1: Computes address without modifying pointer
 
 ptr++: Modifies pointer to next address
-
+=========================================================================================
 6. Pointer to pointer
 int num = 10;
 int *p = &num;
 int **pp = &p;
 printf("%d", **pp); // Output: 10
 
+=========================================================================================
 7. Array of pointers
 int a=1, b=2, c=3;
 int *arr[3] = {&a, &b, &c};
 
+=========================================================================================
 8. Function that swaps two integers
 void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
+=========================================================================================
 
 9. Return pointer from function
 int* create_array(int size) {
     return malloc(size * sizeof(int));
 }
 
+=========================================================================================
 10. Void pointer usage
 void *ptr;
 int num = 10;
 ptr = &num;
 printf("%d", *(int*)ptr);
 
+
+=========================================================================================
 11. Null pointer vs dangling pointer
 Null: int *p = NULL; (explicitly points to nothing)
 
 Dangling: Points to invalid memory (freed or out-of-scope)
 
+=========================================================================================
 12. Avoid dangling pointers
 int *func() {
     static int num = 10; // Static keeps value after return
     return &num;
 }
+=========================================================================================
 
 13. Pointer to function
+
 int add(int a, int b) { return a+b; }
 int (*func_ptr)(int, int) = add;
 printf("%d", func_ptr(2,3)); // Output: 5
+
+=========================================================================================
 14. const with pointers
 const int *p1; // Pointer to constant data
 int *const p2; // Constant pointer
 const int *const p3; // Constant pointer to constant data
+
+=========================================================================================
 15. Pointer to array vs array of pointers
 int (*ptr_to_arr)[5]; // Pointer to array of 5 ints
 int *arr_of_ptrs[5];  // Array of 5 int pointers
+
+=========================================================================================
 16. Dynamic 2D array allocation
 int **matrix = malloc(rows * sizeof(int*));
 for(int i=0; i<rows; i++) 
     matrix[i] = malloc(cols * sizeof(int));
+	
+=========================================================================================
 17. Free 2D array
 for(int i=0; i<rows; i++)
     free(matrix[i]);
 free(matrix);
+
+=========================================================================================
 18. Pointer arithmetic with chars
 char str[] = "Hello";
 char *p = str;
 p += 3; // Points to 'l'
+
+=========================================================================================
 19. Difference between *ptr++ and (*ptr)++
-c
+
 int arr[] = {1,2};
 int *p = arr;
 int a = *p++;  // a=1, p now at arr[1]
 int b = (*p)++; // b=2, arr[1] becomes 3
 
+=========================================================================================
 20. Pointer to structure
 typedef struct { int x,y; } Point;
 Point p1 = {1,2};
 Point *ptr = &p1;
 printf("%d", ptr->x); // Output: 1
 
+=========================================================================================
 21. Array name vs pointer
 int arr[5];
 printf("%zu", sizeof(arr)); // Output: 20 (5*4)
 int *p = arr;
 printf("%zu", sizeof(p));  // Output: 8 (pointer size)
 
+=========================================================================================
 22. Pass array to function
 void process(int *arr, int size) {
     for(int i=0; i<size; i++) 
         arr[i] *= 2;
 }
 
+=========================================================================================
 23. Pointer to constant string
 const char *str = "Hello";
 // str[0]='h'; // Invalid - string literal is read-only
 
+=========================================================================================
 24. Copy string using pointers
 void strcpy(char *dest, const char *src) {
     while((*dest++ = *src++));
 }
 
+=========================================================================================
 25. Reverse string with pointers
 void reverse(char *str) {
     char *end = str;
@@ -129,26 +161,30 @@ void reverse(char *str) {
         end--;
     }
 }
-
+=========================================================================================
 26. Function returning string
 const char* get_message() {
     return "Hello World"; // Returns string literal
 }
+
+=========================================================================================
 27. Pointer arithmetic for 2D arrays
 int arr[2][3] = {{1,2,3},{4,5,6}};
 int *p = &arr[0][0];
 printf("%d", *(p + 2*3 + 1)); // Element [2][1] - invalid bounds
 printf("%d", *(*(arr+1)+2));  // arr[1][2] = 6
 
+=========================================================================================
 28. Pointer to pointer for strings
 char *names[] = {"Alice", "Bob", "Charlie"};
 printf("%c", names[1][0]); // Output: 'B'
 
+=========================================================================================
 29. Triple pointer usage
 int ***ppp;
 // Used for 3D arrays or complex data structures
 
-
+=========================================================================================
 30. Generic pointer handling
 void print_bytes(void *data, size_t size) {
     unsigned char *bytes = data;
@@ -156,42 +192,47 @@ void print_bytes(void *data, size_t size) {
         printf("%02x ", bytes[i]);
 }
 
+=========================================================================================
 31. Pointer difference
 int arr[5];
 int *p1 = &arr[1];
 int *p2 = &arr[4];
 printf("%td", p2 - p1); // Output: 3 (elements between)
 
+=========================================================================================
 32. restrict keyword
 void add(int *restrict a, int *restrict b, int *restrict c) {
     *c = *a + *b; // Compiler can optimize
 }
 
+=========================================================================================
 33. Pointer to array element
 int arr[5] = {1,2,3,4,5};
 int *p = &arr[2]; // Points to third element
 
-
+=========================================================================================
 34. Modify array through pointer
 int arr[3] = {1,2,3};
 int *p = arr;
 *(p+1) = 10; // arr[1] = 10
 
+=========================================================================================
 35. Pointer to VLA (Variable Length Array)
 int rows = 3, cols = 4;
 int (*arr)[cols] = malloc(rows * sizeof(*arr));
 
-
+=========================================================================================
 36. Pointer to incomplete type
 struct Node; // Forward declaration
 struct Node *next; // Valid opaque pointer
 
+=========================================================================================
 
 37. Function pointer array
 void (*commands[])(void) = {&save, &load, &exit};
 commands[0](); // Calls save()
 
-
+=========================================================================================
 38. Pointer to union
 union Data { int i; float f; };
 union Data d;
@@ -199,41 +240,48 @@ d.i = 10;
 union Data *ptr = &d;
 printf("%d", ptr->i);
 
+=========================================================================================
 39. Pointer to bit-field
 struct { unsigned int flag:1; } s;
 // Cannot take address of bit-field: &s.flag invalid
 
+=========================================================================================
 40. Near/far pointers (historical)
 // DOS-era segmented memory (not in standard C)
 
+=========================================================================================
 41. Pointer to string array
 char *strings[] = {"one", "two", "three"};
 char **p = strings;
 printf("%s", p[1]); // Output: "two"
 
-
+=========================================================================================
 42. Compare pointers
 int arr[5];
 int *p1 = &arr[1];
 int *p2 = &arr[3];
 if(p1 < p2) // Valid comparison within same array
 
+=========================================================================================
 
 43. Pointer to constant
 const int num = 10;
 const int *p = &num;
 // *p = 20; // Error - cannot modify const
 
+=========================================================================================
 44. Constant pointer
 int num = 10;
 int *const p = &num;
 *p = 20; // Valid
 // p = NULL; // Error - pointer constant
 
+=========================================================================================
 45. Pointer to volatile variable
 volatile int *status = (volatile int*)0x1000;
 // Prevents compiler optimization for hardware access
 
+=========================================================================================
 46. Pointer to array in struct
 struct Buffer {
     int data[100];
@@ -241,7 +289,7 @@ struct Buffer {
 struct Buffer buf;
 int *p = buf.data; // Points to first element
 
-
+=========================================================================================
 47. Flexible array member
 struct DynArray {
     size_t size;
@@ -251,20 +299,22 @@ struct DynArray *da = malloc(sizeof(*da) + 10*sizeof(int));
 da->size = 10;
 
 
-
+=========================================================================================
 48. Pointer to function parameter
 void modify(int **p) {
     *p = malloc(sizeof(int));
     **p = 42;
 }
 
+=========================================================================================
 49. Pointer to compound literal
 int *p = (int[]){1,2,3}; // Points to anonymous array
 printf("%d", p[1]); // Output: 2
 
-
+=========================================================================================
 50. Safely dereference pointers
 int *p = some_function();
 if(p != NULL) {
     *p = 10; // Safe dereference
 }
+=========================================================================================
